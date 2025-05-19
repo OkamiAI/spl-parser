@@ -24,7 +24,12 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
-dependencies = ["aiohttp", "lark-parser", "click"]
+dependencies = [
+    "aiohttp",
+    "lark-parser",
+    "click",
+    "pytest>=8.3.5",
+]
 
 [project.scripts]
 spl_parser = "spl_parser.cli:cli"

@@ -1,100 +1,83 @@
 # SPL Parser
 
-SPL Parser is a command-line application for parsing of Splunk’s Search
-Processing Language (SPL). The main feature of SPL Parser is the ability to
-generate a tmLanguage grammar for SPL, which can be used in various text editors
-for syntax highlighting of SPL. SPL Parser is also able to interactively view
-details about any SPL command.
+SPL Parser is a command-line application for parsing Splunk’s Search Processing
+Language (SPL).\
+Its main feature is generating a `tmLanguage` grammar for SPL to enable syntax
+highlighting in various text editors.\
+It can also interactively display details about any SPL command.
 
 ## Features
 
-- Generate tmLanguage grammar for SPL that can be used for syntax highlighting
+- Generate `tmLanguage` grammar for SPL for syntax highlighting
 - View details about any SPL command
 - Use a remote Splunk server or local files
 
 ## Installation
 
-The project can be installed using pip from TestPyPI::
+To install using [`uv`](https://github.com/astral-sh/uv):
 
-    pip install --extra-index-url https://test.pypi.org/pypi spl_parser
+```bash
+uv pip install --extra-index-url https://test.pypi.org/pypi spl_parser
 
-Or by cloning GitHub repository::
+Or clone this repository and install in editable mode:
 
-    git clone https://github.com/kotlaluk/spl-parser
+git clone https://github.com/kotlaluk/spl-parser
+cd spl-parser
+uv pip install -e .
 
-and running::
+Usage
 
-    python setup.py install
+The SPL Parser CLI can be invoked via:
 
-## Usage
+spl_parser --help
 
-The SPL Parser CLI application can be invoked by running `spl_parser`. To view
-help run::
+It works in two modes:
+	•	remote: connect to a live Splunk server (URL required)
+	•	local: use a local searchbnf.conf or .json file
 
-    spl_parser --help
+Credentials for remote mode can be supplied via prompt or the SPLUNK_USERNAME and SPLUNK_PASSWORD environment variables.
 
-SPL Parser can work either with a **remote** Splunk server or a **local**
-searchbnf file. The remote server is specified by URL, the local file by its
-name and path. Note that the local searchbnf file must be in `.conf` or `.json`
-format.
+Example (remote, view command)
 
-If case of a **remote** Splunk server, the user will be prompted for providing
-credentials for authentication. Alternatively, these credentials can be provided
-by setting `SPLUNK_USERNAME` and `SPLUNK_PASSWORD` environment variables.
+spl_parser remote https://localhost:8089 view transaction
 
-In both cases, the application allows to **view** details about a particlular
-SPL command or **generate** a tmLanguage grammar file.
+Example (local, generate grammar)
 
-If using **view** command, the command name is expected as argument. The command
-details are then retrieved and displayed in the console.
+spl_parser local examples/searchbnf.conf generate
 
-Example of **view** invocation in **remote** mode::
+Syntax Highlighting
 
-    spl_parser remote https://localhost:8089 view transaction
+This repo contains a VSCode extension for SPL syntax highlighting:
+	1.	Generate the grammar file (spl.tmLanguage.json)
+	2.	Copy it into: spl-highlighter/syntaxes/
+	3.	Install the extension by copying the spl-highlighter/ folder into your VSCode extensions directory (e.g. ~/.vscode/extensions/)
 
-If using **generate** command, a tmLanguage grammar will be generated and saved
-in the file `spl.tmLanguage.json`. Alternatively, a file name can be specified
-by using `--outfile` option. The generated grammar file can then be used with a
-text editor for syntax highlighting of SPL.
+Files ending in .spl will be highlighted automatically.
+The extension includes an optional “SPL Theme” with colours inspired by Splunk Web.
 
-Example **generate** invocation in **local** mode::
+Testing
 
-    spl_parser local examples/searchbnf.conf generate
+To run tests:
 
-## Syntax highlighting
+uv pip install -e ".[test]"
+pytest
 
-This repository contains a prepared extension for VSCode text editor. All you
-need is to copy the generated grammar file `spl.tmLanguage.json` into the folder
-of the extension `spl-highlighter/syntaxes`, and copy the extension folder into
-your installation of VSCode (typically `~/.vscode/extensions`).
+Documentation
 
-New files with `.spl` file extension will automatically provide syntax
-highlighting for Splunk queries. The extension allows also to set "SPL Theme"
-with colors similar to those in Splunk Web interface.
+Online docs: https://spl_parser.readthedocs.io
 
-## Testing
+To build locally:
 
-The project contains a bundle of tests.
+cd docs
+make html
 
-These can be invoked by running::
+Then open docs/_build/html/index.html in your browser.
 
-    python setup.py test
-
-## Documentation
-
-Documentation of the project is available at
-`Read the Docs <https://spl_parser.readthedocs.io>`_.
-
-To build the documentation manually::
-
-cd docs make html
-
-and open the file `docs/_build/html/index.html` in a web browser.
-
-## Author
+Author
 
 Lukáš Kotlaba (lukas.kotlaba@gmail.com)
 
-## License
+License
 
-The project is licensed under GNU General Public License v3.0.
+GNU General Public License v3.0
+```
