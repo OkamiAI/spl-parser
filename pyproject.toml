@@ -29,6 +29,8 @@ dependencies = [
     "lark-parser",
     "click",
     "pytest>=8.3.5",
+    "sphinx>=7.1.2",
+    "sphinx-rtd-theme>=3.0.2",
 ]
 
 [project.scripts]
