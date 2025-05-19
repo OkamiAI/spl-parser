@@ -32,20 +32,12 @@ The SPL Parser CLI can be invoked via:
 spl_parser --help
 
 It works in two modes:
-	•	remote: connect to a live Splunk server (URL required)
-	•	local: use a local searchbnf.conf or .json file
+- remote: connect to a live Splunk server (URL required)
+- local: use a local searchbnf.conf or .json file
 
 Credentials for remote mode can be supplied via prompt or the SPLUNK_USERNAME and SPLUNK_PASSWORD environment variables.
 
-Example (remote, view command)
-
-spl_parser remote https://localhost:8089 view transaction
-
-Example (local, generate grammar)
-
-spl_parser local examples/searchbnf.conf generate
-
-Syntax Highlighting
+### Example (remote, view command)
 
 This repo contains a VSCode extension for SPL syntax highlighting:
 	1.	Generate the grammar file (spl.tmLanguage.json)
@@ -55,22 +47,17 @@ This repo contains a VSCode extension for SPL syntax highlighting:
 Files ending in .spl will be highlighted automatically.
 The extension includes an optional “SPL Theme” with colours inspired by Splunk Web.
 
-Testing
-
-To run tests:
-
+This repo contains a VSCode extension for SPL syntax highlighting:
+1. Generate the grammar file (spl.tmLanguage.json)
+2. Copy it into: spl-highlighter/syntaxes/
+3. Install the extension by copying the spl-highlighter/ folder into your VSCode extensions directory (e.g. ~/.vscode/extensions/)
 uv pip install -e ".[test]"
 pytest
 
 Documentation
+## Testing
 
-Online docs: https://spl_parser.readthedocs.io
-
-To build locally:
-
-cd docs
-make html
-
+To run tests:
 Then open docs/_build/html/index.html in your browser.
 
 Author
@@ -79,5 +66,8 @@ Lukáš Kotlaba (lukas.kotlaba@gmail.com)
 
 License
 
-GNU General Public License v3.0
+To build locally:
+Lukáš Kotlaba (lukas.kotlaba@gmail.com)
+
+## License
 ```
