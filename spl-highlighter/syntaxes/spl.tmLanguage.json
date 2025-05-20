@@ -4,6 +4,9 @@
     "patterns": [
         {
             "include": "#commands"
+        },
+        {
+            "include": "#template_expressions"
         }
     ],
     "repository": {
@@ -530,6 +533,14 @@
                 }
             ]
         },
+        "template_expressions": {
+            "patterns": [
+                {
+                    "name": "variable.other.template-expression.spl",
+                    "match": "\\$\\{[^}]+\\}"
+                }
+            ]
+        },
         "commands.abstract": {
             "begin": "(?<=\\[|\\|)\\s+(abstract|excerpt)\\b",
             "end": "(?<=\\]|\\|)",
@@ -547,7 +558,7 @@
         "arguments.abstract": {
             "patterns": [
                 {
-                    "match": "(maxterms|maxlines)=(?:.+?)(?:\\s|$)",
+                    "match": "(maxlines|maxterms)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -627,7 +638,7 @@
         "arguments.addtotals": {
             "patterns": [
                 {
-                    "match": "(fieldname|col|label|labelfield|row)=(?:.+?)(?:\\s|$)",
+                    "match": "(fieldname|col|labelfield|row|label)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -679,7 +690,7 @@
         "arguments.anomalies": {
             "patterns": [
                 {
-                    "match": "(blacklistthreshold|threshold|labelonly|blacklist|maxvalues|field|normalize)=(?:.+?)(?:\\s|$)",
+                    "match": "(blacklistthreshold|blacklist|maxvalues|labelonly|threshold|field|normalize)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -711,7 +722,7 @@
         "arguments.anomalousvalue": {
             "patterns": [
                 {
-                    "match": "(maxanofreq|minsupcount|minsupfreq|pthresh|minnormfreq|action)=(?:.+?)(?:\\s|$)",
+                    "match": "(minsupcount|action|pthresh|maxanofreq|minnormfreq|minsupfreq)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -721,7 +732,7 @@
             ]
         },
         "functions.anomalousvalue": {
-            "match": "\\b(filter|summary|annotate)(\\()",
+            "match": "\\b(filter|annotate|summary)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -730,7 +741,7 @@
         },
         "operators.anomalousvalue": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(ANNOTATE|SUMMARY|FILTER)\\b"
+            "match": "\\b(SUMMARY|ANNOTATE|FILTER)\\b"
         },
         "commands.anomalydetection": {
             "begin": "(?<=\\[|\\|)\\s+(anomalydetection)\\b",
@@ -755,7 +766,7 @@
         "arguments.anomalydetection": {
             "patterns": [
                 {
-                    "match": "(action|method|cutoff|pthresh)=(?:.+?)(?:\\s|$)",
+                    "match": "(cutoff|method|action|pthresh)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -765,7 +776,7 @@
             ]
         },
         "functions.anomalydetection": {
-            "match": "\\b(rm|iqr|transform|annotate|zscore|tf|remove|filter|summary|histogram)(\\()",
+            "match": "\\b(rm|annotate|histogram|tf|zscore|remove|iqr|summary|filter|transform)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -774,7 +785,7 @@
         },
         "operators.anomalydetection": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(FILTER|ANNOTATE|SUMMARY|HISTOGRAM|TRANSFORM|IQR|REMOVE|RM|ZSCORE|TF)\\b"
+            "match": "\\b(ANNOTATE|RM|FILTER|SUMMARY|TRANSFORM|TF|ZSCORE|HISTOGRAM|REMOVE|IQR)\\b"
         },
         "commands.append": {
             "begin": "(?<=\\[|\\|)\\s+(append)\\b",
@@ -819,7 +830,7 @@
         "arguments.appendcols": {
             "patterns": [
                 {
-                    "match": "(override|maxout|timeout|maxtime|extendtimerange)=(?:.+?)(?:\\s|$)",
+                    "match": "(timeout|extendtimerange|maxout|override|maxtime)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -897,7 +908,7 @@
         "arguments.associate": {
             "patterns": [
                 {
-                    "match": "(improv|supcnt|supfreq)=(?:.+?)(?:\\s|$)",
+                    "match": "(supfreq|supcnt|improv)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -972,7 +983,7 @@
         "arguments.bin": {
             "patterns": [
                 {
-                    "match": "(minspan|span|start|aligntime|bins|end)=(?:.+?)(?:\\s|$)",
+                    "match": "(aligntime|end|start|bins|span|minspan)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -982,7 +993,7 @@
             ]
         },
         "functions.bin": {
-            "match": "\\b(earliest|day|quarter|sec|week|hr|month|year|latest|min|as|log)(\\()",
+            "match": "\\b(latest|week|earliest|year|sec|as|log|min|day|quarter|hr|month)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -991,7 +1002,7 @@
         },
         "operators.bin": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WEEK|YEAR|QUARTER|AS|EARLIEST|DAY|MONTH|LOG|MIN|HR|LATEST|SEC)\\b"
+            "match": "\\b(SEC|AS|EARLIEST|LOG|MIN|WEEK|HR|MONTH|DAY|LATEST|YEAR|QUARTER)\\b"
         },
         "commands.bucketdir": {
             "begin": "(?<=\\[|\\|)\\s+(bucketdir)\\b",
@@ -1010,7 +1021,7 @@
         "arguments.bucketdir": {
             "patterns": [
                 {
-                    "match": "(countfield|sizefield|pathfield|sep|maxcount)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|countfield|sizefield|maxcount|pathfield)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1042,7 +1053,7 @@
         "arguments.chart": {
             "patterns": [
                 {
-                    "match": "(minspan|span|dedup_splitvals|start|aligntime|agg|bins|otherstr|sep|usenull|nullstr|end|useother|cont|limit|format)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|format|dedup_splitvals|nullstr|cont|limit|useother|aligntime|end|usenull|otherstr|start|agg|bins|span|minspan)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1052,7 +1063,7 @@
             ]
         },
         "functions.chart": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|earliest|random|ln|mvsort|sparkline|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|notin|time|strptime|range|mvindex|distinct_count|abs|sum|log|top|isbool|max|commands|sin|in|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|bottom|atan|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|latest|min|pow|isint|isnum|day|relative_time|sha256|sumsq|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|notin|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|nullif|split|hr|varp|top|month|pi|ltrim|searchmatch|asin|hypot|bottom|sum|earliest|year|stdevp|null|sinh|false|acos|latest|ln|rtrim|mvfilter|like|md5|sec|strftime|len|sqrt|sparkline|typeof|coalesce|ifnull|isbool|sumsq|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|in|range|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1061,7 +1072,7 @@
         },
         "operators.chart": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|OVER|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|IN|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|COUNT|ISINT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|TOP|SUMSQ|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|EARLIEST|ISBOOL|BY|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|LATEST|BOTTOM|MVSORT|SUM|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|SPARKLINE|PI|AVG|TONUMBER|ABS|NOTIN|ACOSH|RANGE|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|EARLIEST|MVRANGE|HYPOT|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|IN|ACOS|LEN|RANGE|DAY|TAN|ISNULL|SPARKLINE|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|MEAN|C|AND|SHA1|SUMSQ|ATAN|COALESCE|RTRIM|BY|BOTTOM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|LATEST|ABS|SUM|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OVER|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|TOP|ISINT|MVJOIN|AS|ROUND|SIN|NOTIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.cofilter": {
             "begin": "(?<=\\[|\\|)\\s+(cofilter)\\b",
@@ -1081,7 +1092,7 @@
             ]
         },
         "functions.cofilter": {
-            "match": "\\b(field1|field2)(\\()",
+            "match": "\\b(field2|field1)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1090,7 +1101,7 @@
         },
         "operators.cofilter": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(FIELD1|FIELD2)\\b"
+            "match": "\\b(FIELD2|FIELD1)\\b"
         },
         "commands.collapse": {
             "begin": "(?<=\\[|\\|)\\s+(collapse)\\b",
@@ -1109,7 +1120,7 @@
         "arguments.collapse": {
             "patterns": [
                 {
-                    "match": "(chunksize|force)=(?:.+?)(?:\\s|$)",
+                    "match": "(force|chunksize)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1135,7 +1146,7 @@
         "arguments.concurrency": {
             "patterns": [
                 {
-                    "match": "(start|output|duration)=(?:.+?)(?:\\s|$)",
+                    "match": "(output|start|duration)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1161,7 +1172,7 @@
         "arguments.contingency": {
             "patterns": [
                 {
-                    "match": "(maxrows|usetotal|totalstr|minrowcover|mincolcover|maxcols)=(?:.+?)(?:\\s|$)",
+                    "match": "(maxrows|maxcols|usetotal|totalstr|minrowcover|mincolcover)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1231,7 +1242,7 @@
         "arguments.copyresults": {
             "patterns": [
                 {
-                    "match": "(sid|dest)=(?:.+?)(?:\\s|$)",
+                    "match": "(dest|sid)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1267,7 +1278,7 @@
         "arguments.createrss": {
             "patterns": [
                 {
-                    "match": "(link|count|descr|path|graceful|name)=(?:.+?)(?:\\s|$)",
+                    "match": "(link|path|descr|count|graceful|name)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1299,7 +1310,7 @@
         "arguments.datamodel": {
             "patterns": [
                 {
-                    "match": "(allow_old_summaries|strict_fields|summariesonly)=(?:.+?)(?:\\s|$)",
+                    "match": "(summariesonly|strict_fields|allow_old_summaries)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1309,7 +1320,7 @@
             ]
         },
         "functions.datamodel": {
-            "match": "\\b(search|search_string|acceleration_search_string|flat_string|flat|acceleration_search)(\\()",
+            "match": "\\b(acceleration_search_string|flat|search_string|search|acceleration_search|flat_string)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1318,7 +1329,7 @@
         },
         "operators.datamodel": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(SEARCH_STRING|SEARCH|FLAT_STRING|ACCELERATION_SEARCH|FLAT|ACCELERATION_SEARCH_STRING)\\b"
+            "match": "\\b(ACCELERATION_SEARCH_STRING|SEARCH_STRING|FLAT_STRING|FLAT|SEARCH|ACCELERATION_SEARCH)\\b"
         },
         "commands.debug": {
             "begin": "(?<=\\[|\\|)\\s+(debug)\\b",
@@ -1343,7 +1354,7 @@
         "arguments.debug": {
             "patterns": [
                 {
-                    "match": "(param2|cmd|param1)=(?:.+?)(?:\\s|$)",
+                    "match": "(cmd|param1|param2)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1353,7 +1364,7 @@
             ]
         },
         "functions.debug": {
-            "match": "\\b(delete|roll|rescan|logchange|validate|optimize|sleep|sync)(\\()",
+            "match": "\\b(logchange|rescan|sync|sleep|roll|validate|delete|optimize)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1362,7 +1373,7 @@
         },
         "operators.debug": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(VALIDATE|SLEEP|LOGCHANGE|SYNC|RESCAN|DELETE|ROLL|OPTIMIZE)\\b"
+            "match": "\\b(ROLL|SLEEP|LOGCHANGE|RESCAN|VALIDATE|SYNC|OPTIMIZE|DELETE)\\b"
         },
         "commands.dedup": {
             "begin": "(?<=\\[|\\|)\\s+(dedup)\\b",
@@ -1387,7 +1398,7 @@
         "arguments.dedup": {
             "patterns": [
                 {
-                    "match": "(keepevents|keepempty|consecutive)=(?:.+?)(?:\\s|$)",
+                    "match": "(consecutive|keepevents|keepempty)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1397,7 +1408,7 @@
             ]
         },
         "functions.dedup": {
-            "match": "\\b(str|sortby|auto|num|ip)(\\()",
+            "match": "\\b(str|sortby|ip|auto|num)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1406,7 +1417,7 @@
         },
         "operators.dedup": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NUM|SORTBY|AUTO|STR|IP)\\b"
+            "match": "\\b(NUM|SORTBY|STR|IP|AUTO)\\b"
         },
         "commands.delete": {
             "begin": "(?<=\\[|\\|)\\s+(delete)\\b",
@@ -1479,7 +1490,7 @@
         "arguments.diff": {
             "patterns": [
                 {
-                    "match": "(diffheader|maxlen|position1|position2|context|attribute)=(?:.+?)(?:\\s|$)",
+                    "match": "(context|position1|attribute|position2|diffheader|maxlen)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1505,7 +1516,7 @@
         "arguments.dispatch": {
             "patterns": [
                 {
-                    "match": "(end_time|ttl|start_time|maxtime|maxresults|label|id|spawn_process)=(?:.+?)(?:\\s|$)",
+                    "match": "(id|start_time|end_time|label|maxresults|ttl|spawn_process|maxtime)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1531,7 +1542,7 @@
         "arguments.editinfo": {
             "patterns": [
                 {
-                    "match": "(msg_debug|msg_warn|msg_error|starttime|endtime|keyset|msg_info)=(?:.+?)(?:\\s|$)",
+                    "match": "(msg_debug|keyset|msg_warn|msg_error|starttime|endtime|msg_info)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1557,7 +1568,7 @@
         "arguments.erex": {
             "patterns": [
                 {
-                    "match": "(maxtrainers|counterexamples|fromfield|examples)=(?:.+?)(?:\\s|$)",
+                    "match": "(fromfield|counterexamples|examples|maxtrainers)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1584,7 +1595,7 @@
             ]
         },
         "functions.eval": {
-            "match": "\\b(exact|split|replace|floor|ceiling|true|typeof|tanh|isnotnull|random|ln|mvsort|mvdedup|tan|sqrt|spath|atan2|mvfilter|acosh|coalesce|mvzip|asinh|time|strptime|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|now|urldecode|cosh|tonumber|md5|case|cidrmatch|lower|like|isnull|false|upper|sha512|len|mvmap|sha1|atan|exp|match|tostring|ltrim|hypot|round|min|pow|isint|isnum|relative_time|sha256|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|max|min|relative_time|validate|random|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|log|abs|tanh|sin|sigfig|mvrange|mvmap|ceil|exp|nullif|split|pi|ltrim|searchmatch|asin|hypot|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|atan|match|isstr|urldecode|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|exact|true|asinh|mvdedup|round|spath|strptime|isnum|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1593,7 +1604,7 @@
         },
         "operators.eval": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|STRFTIME|SPLIT|MVINDEX|SINH|MVCOUNT|COMMANDS|SHA512|MIN|RTRIM|ISNULL|MVDEDUP|TIME|FALSE|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|ISSTR|CASE|RANDOM|MVZIP|UPPER|TRUE|MVFIND|TANH|ISINT|CEIL|LOG|LEN|OR|NULLIF|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|TAN|EXACT|POW|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|SIN|PI|TONUMBER|ABS|ACOSH|LTRIM|SHA256|FLOOR|MVMAP|LIKE|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|ASINH|HYPOT|XOR|MVRANGE|SEARCHMATCH|SHA512|MVMAP|VALIDATE|MIN|URLDECODE|ACOS|LEN|TAN|ISNULL|MVFILTER|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|SHA1|ATAN|COALESCE|RTRIM|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|NULL|CASE|IF|ACOSH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|NOW|MVAPPEND|ISBOOL|MVCOUNT|FALSE|OR|TYPEOF|SINH|ISINT|MVJOIN|ROUND|SIN|NOT|SPLIT|MAX|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|MVSORT|TANH|ATAN2|LTRIM|TOSTRING)\\b"
         },
         "commands.extract": {
             "begin": "(?<=\\[|\\|)\\s+(extract|kv)\\b",
@@ -1612,7 +1623,7 @@
         "arguments.extract": {
             "patterns": [
                 {
-                    "match": "(maxchars|pairdelim|segment|limit|kvdelim|mv_add|clean_keys|reload)=(?:.+?)(?:\\s|$)",
+                    "match": "(mv_add|maxchars|clean_keys|kvdelim|limit|reload|segment|pairdelim)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1639,7 +1650,7 @@
             ]
         },
         "functions.fieldformat": {
-            "match": "\\b(exact|split|replace|floor|ceiling|true|typeof|tanh|isnotnull|random|ln|mvsort|mvdedup|tan|sqrt|spath|atan2|mvfilter|acosh|coalesce|mvzip|asinh|time|strptime|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|now|urldecode|cosh|tonumber|md5|case|cidrmatch|lower|like|isnull|false|upper|sha512|len|mvmap|sha1|atan|exp|match|tostring|ltrim|hypot|round|min|pow|isint|isnum|relative_time|sha256|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|max|min|relative_time|validate|random|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|log|abs|tanh|sin|sigfig|mvrange|mvmap|ceil|exp|nullif|split|pi|ltrim|searchmatch|asin|hypot|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|atan|match|isstr|urldecode|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|exact|true|asinh|mvdedup|round|spath|strptime|isnum|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1648,7 +1659,7 @@
         },
         "operators.fieldformat": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|STRFTIME|SPLIT|MVINDEX|SINH|MVCOUNT|COMMANDS|SHA512|MIN|RTRIM|ISNULL|MVDEDUP|TIME|FALSE|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|ISSTR|CASE|RANDOM|MVZIP|UPPER|TRUE|MVFIND|TANH|ISINT|CEIL|LOG|LEN|OR|NULLIF|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|TAN|EXACT|POW|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|SIN|PI|TONUMBER|ABS|ACOSH|LTRIM|SHA256|FLOOR|MVMAP|LIKE|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|ASINH|HYPOT|XOR|MVRANGE|SEARCHMATCH|SHA512|MVMAP|VALIDATE|MIN|URLDECODE|ACOS|LEN|TAN|ISNULL|MVFILTER|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|SHA1|ATAN|COALESCE|RTRIM|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|NULL|CASE|IF|ACOSH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|NOW|MVAPPEND|ISBOOL|MVCOUNT|FALSE|OR|TYPEOF|SINH|ISINT|MVJOIN|ROUND|SIN|NOT|SPLIT|MAX|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|MVSORT|TANH|ATAN2|LTRIM|TOSTRING)\\b"
         },
         "commands.fields": {
             "begin": "(?<=\\[|\\|)\\s+(fields)\\b",
@@ -1713,7 +1724,7 @@
         "arguments.findkeywords": {
             "patterns": [
                 {
-                    "match": "(dedup|labelfield)=(?:.+?)(?:\\s|$)",
+                    "match": "(labelfield|dedup)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1775,7 +1786,7 @@
         "arguments.folderize": {
             "patterns": [
                 {
-                    "match": "(size|minfolders|maxfolders|attr|sep)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|attr|minfolders|size|maxfolders)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1801,7 +1812,7 @@
         "arguments.foreach": {
             "patterns": [
                 {
-                    "match": "(matchseg1|fieldstr|matchseg3|matchstr|matchseg2)=(?:.+?)(?:\\s|$)",
+                    "match": "(matchstr|fieldstr|matchseg2|matchseg3|matchseg1)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1837,7 +1848,7 @@
         },
         "operators.from": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(INPUTLOOKUP|FEDERATED|SAVEDSEARCH|DATAMODEL)\\b"
+            "match": "\\b(FEDERATED|INPUTLOOKUP|DATAMODEL|SAVEDSEARCH)\\b"
         },
         "commands.gauge": {
             "begin": "(?<=\\[|\\|)\\s+(gauge)\\b",
@@ -1872,7 +1883,7 @@
         "arguments.gentimes": {
             "patterns": [
                 {
-                    "match": "(start|end|increment)=(?:.+?)(?:\\s|$)",
+                    "match": "(increment|end|start)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1882,7 +1893,7 @@
             ]
         },
         "functions.gentimes": {
-            "match": "\\b(s|m|h|d)(\\()",
+            "match": "\\b(d|m|h|s)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1891,7 +1902,7 @@
         },
         "operators.gentimes": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(S|H|D|M)\\b"
+            "match": "\\b(D|S|H|M)\\b"
         },
         "commands.geostats": {
             "begin": "(?<=\\[|\\|)\\s+(geostats)\\b",
@@ -1916,7 +1927,7 @@
         "arguments.geostats": {
             "patterns": [
                 {
-                    "match": "(translatetoxy|outputlongfield|locallimit|binspanlong|maxzoomlevel|outputlatfield|globallimit|latfield|binspanlat|longfield)=(?:.+?)(?:\\s|$)",
+                    "match": "(longfield|outputlongfield|locallimit|maxzoomlevel|outputlatfield|binspanlat|binspanlong|globallimit|translatetoxy|latfield)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1926,7 +1937,7 @@
             ]
         },
         "functions.geostats": {
-            "match": "\\b(exact|split|count|replace|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|random|ln|mvsort|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|time|strptime|distinct_count|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|atan|exp|match|avg|tostring|ltrim|hypot|round|min|pow|isint|isnum|relative_time|sha256|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|max|min|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|mvrange|mvmap|ceil|exactperc|upperperc|avg|exp|nullif|split|varp|pi|ltrim|searchmatch|asin|hypot|stdevp|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -1935,7 +1946,7 @@
         },
         "operators.geostats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|RTRIM|ISNULL|AS|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|ISINT|COUNT|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|TAN|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|SIN|PI|AVG|TONUMBER|ABS|ACOSH|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|HYPOT|MVRANGE|SEARCHMATCH|SHA512|MVMAP|VALIDATE|MIN|URLDECODE|ACOS|LEN|TAN|ISNULL|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|C|MEAN|SHA1|ATAN|COALESCE|RTRIM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|ISINT|MVJOIN|AS|ROUND|SIN|NOT|SPLIT|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|TOSTRING)\\b"
         },
         "commands.geom": {
             "begin": "(?<=\\[|\\|)\\s+(geom)\\b",
@@ -1954,7 +1965,7 @@
         "arguments.geom": {
             "patterns": [
                 {
-                    "match": "(featureIdField|gen|min_y|max_y|min_x|max_x|allFeatures)=(?:.+?)(?:\\s|$)",
+                    "match": "(min_x|gen|min_y|max_x|max_y|featureIdField|allFeatures)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -1980,7 +1991,7 @@
         "arguments.geomfilter": {
             "patterns": [
                 {
-                    "match": "(max_y|max_x|min_x|min_y)=(?:.+?)(?:\\s|$)",
+                    "match": "(min_x|min_y|max_x|max_y)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2012,7 +2023,7 @@
         "arguments.head": {
             "patterns": [
                 {
-                    "match": "(keeplast|limit|null)=(?:.+?)(?:\\s|$)",
+                    "match": "(null|limit|keeplast)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2022,7 +2033,7 @@
             ]
         },
         "functions.head": {
-            "match": "\\b(exact|split|replace|floor|ceiling|true|typeof|tanh|isnotnull|random|ln|mvsort|mvdedup|tan|sqrt|spath|atan2|mvfilter|acosh|coalesce|mvzip|asinh|time|strptime|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|now|urldecode|cosh|tonumber|md5|case|cidrmatch|lower|like|isnull|false|upper|sha512|len|mvmap|sha1|atan|exp|match|tostring|ltrim|hypot|round|min|pow|isint|isnum|relative_time|sha256|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|max|min|relative_time|validate|random|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|log|abs|tanh|sin|sigfig|mvrange|mvmap|ceil|exp|nullif|split|pi|ltrim|searchmatch|asin|hypot|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|atan|match|isstr|urldecode|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|exact|true|asinh|mvdedup|round|spath|strptime|isnum|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2031,7 +2042,7 @@
         },
         "operators.head": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|STRFTIME|SPLIT|MVINDEX|SINH|MVCOUNT|COMMANDS|SHA512|MIN|RTRIM|ISNULL|MVDEDUP|TIME|FALSE|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|ISSTR|CASE|RANDOM|MVZIP|UPPER|TRUE|MVFIND|TANH|ISINT|CEIL|LOG|LEN|OR|NULLIF|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|TAN|EXACT|POW|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|SIN|PI|TONUMBER|ABS|ACOSH|LTRIM|SHA256|FLOOR|MVMAP|LIKE|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|ASINH|HYPOT|XOR|MVRANGE|SEARCHMATCH|SHA512|MVMAP|VALIDATE|MIN|URLDECODE|ACOS|LEN|TAN|ISNULL|MVFILTER|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|SHA1|ATAN|COALESCE|RTRIM|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|NULL|CASE|IF|ACOSH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|NOW|MVAPPEND|ISBOOL|MVCOUNT|FALSE|OR|TYPEOF|SINH|ISINT|MVJOIN|ROUND|SIN|NOT|SPLIT|MAX|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|MVSORT|TANH|ATAN2|LTRIM|TOSTRING)\\b"
         },
         "commands.tail": {
             "begin": "(?<=\\[|\\|)\\s+(tail)\\b",
@@ -2102,7 +2113,7 @@
         "arguments.dbinspect": {
             "patterns": [
                 {
-                    "match": "(timeformat|corruptonly|span|index)=(?:.+?)(?:\\s|$)",
+                    "match": "(index|span|timeformat|corruptonly)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2112,7 +2123,7 @@
             ]
         },
         "functions.dbinspect": {
-            "match": "\\b(day|quarter|sec|week|hr|month|year|min|log)(\\()",
+            "match": "\\b(week|year|sec|log|min|day|quarter|hr|month)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2121,7 +2132,7 @@
         },
         "operators.dbinspect": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WEEK|YEAR|QUARTER|DAY|MONTH|LOG|MIN|HR|SEC)\\b"
+            "match": "\\b(SEC|LOG|MIN|WEEK|HR|MONTH|DAY|YEAR|QUARTER)\\b"
         },
         "commands.iconify": {
             "begin": "(?<=\\[|\\|)\\s+(iconify)\\b",
@@ -2153,7 +2164,7 @@
         "arguments.inputcsv": {
             "patterns": [
                 {
-                    "match": "(max|dispatch|append|events|start)=(?:.+?)(?:\\s|$)",
+                    "match": "(events|dispatch|start|append|max)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2189,7 +2200,7 @@
         "arguments.inputlookup": {
             "patterns": [
                 {
-                    "match": "(start|max|append)=(?:.+?)(?:\\s|$)",
+                    "match": "(append|start|max)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2243,7 +2254,7 @@
         "arguments.join": {
             "patterns": [
                 {
-                    "match": "(right|left|usetime|max|overwrite|type|earlier)=(?:.+?)(?:\\s|$)",
+                    "match": "(earlier|type|right|left|usetime|overwrite|max)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2253,7 +2264,7 @@
             ]
         },
         "functions.join": {
-            "match": "\\b(datamodel|left|inner|federated|outer|inputlookup|savedsearch)(\\()",
+            "match": "\\b(inner|datamodel|savedsearch|left|outer|federated|inputlookup)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2262,7 +2273,7 @@
         },
         "operators.join": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WHERE|INPUTLOOKUP|FEDERATED|SAVEDSEARCH|DATAMODEL|OUTER|INNER|LEFT)\\b"
+            "match": "\\b(INNER|LEFT|SAVEDSEARCH|FEDERATED|INPUTLOOKUP|OUTER|WHERE|DATAMODEL)\\b"
         },
         "commands.selfjoin": {
             "begin": "(?<=\\[|\\|)\\s+(selfjoin)\\b",
@@ -2281,7 +2292,7 @@
         "arguments.selfjoin": {
             "patterns": [
                 {
-                    "match": "(keepsingle|max|overwrite)=(?:.+?)(?:\\s|$)",
+                    "match": "(overwrite|max|keepsingle)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2313,7 +2324,7 @@
         "arguments.kmeans": {
             "patterns": [
                 {
-                    "match": "(showcentroid|maxiters|k|dt|t|cfield|reps)=(?:.+?)(?:\\s|$)",
+                    "match": "(cfield|reps|t|k|showcentroid|dt|maxiters)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2323,7 +2334,7 @@
             ]
         },
         "functions.kmeans": {
-            "match": "\\b(cb|cityblock|l1|cosine|sqeuclidean|sq|l1norm|l2norm|l2|cos)(\\()",
+            "match": "\\b(cos|sq|l1|l2|l1norm|cosine|l2norm|cityblock|sqeuclidean|cb)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2332,7 +2343,7 @@
         },
         "operators.kmeans": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(COS|CB|L2|COSINE|L1|CITYBLOCK|L2NORM|SQEUCLIDEAN|L1NORM|SQ)\\b"
+            "match": "\\b(COS|L1NORM|SQEUCLIDEAN|L2|CITYBLOCK|SQ|COSINE|CB|L2NORM|L1)\\b"
         },
         "commands.kvform": {
             "begin": "(?<=\\[|\\|)\\s+(kvform)\\b",
@@ -2351,7 +2362,7 @@
         "arguments.kvform": {
             "patterns": [
                 {
-                    "match": "(field|form)=(?:.+?)(?:\\s|$)",
+                    "match": "(form|field)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2383,7 +2394,7 @@
         "arguments.localize": {
             "patterns": [
                 {
-                    "match": "(timeafter|maxpause|timebefore)=(?:.+?)(?:\\s|$)",
+                    "match": "(timebefore|timeafter|maxpause)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2393,7 +2404,7 @@
             ]
         },
         "functions.localize": {
-            "match": "\\b(m|s|d|h)(\\()",
+            "match": "\\b(s|d|m|h)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2402,7 +2413,7 @@
         },
         "operators.localize": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(H|S|D|M)\\b"
+            "match": "\\b(S|D|H|M)\\b"
         },
         "commands.localop": {
             "begin": "(?<=\\[|\\|)\\s+(localop)\\b",
@@ -2431,7 +2442,7 @@
         "arguments.loadjob": {
             "patterns": [
                 {
-                    "match": "(ignore_running|events|artifact_offset|savedsearch|job_delegate)=(?:.+?)(?:\\s|$)",
+                    "match": "(events|job_delegate|ignore_running|savedsearch|artifact_offset)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2463,7 +2474,7 @@
         "arguments.lookup": {
             "patterns": [
                 {
-                    "match": "(update|local|event_time_field)=(?:.+?)(?:\\s|$)",
+                    "match": "(local|update|event_time_field)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2482,7 +2493,7 @@
         },
         "operators.lookup": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(OUTPUTNEW|OUTPUT|AS)\\b"
+            "match": "\\b(AS|OUTPUT|OUTPUTNEW)\\b"
         },
         "commands.makecontinuous": {
             "begin": "(?<=\\[|\\|)\\s+(makecontinuous)\\b",
@@ -2507,7 +2518,7 @@
         "arguments.makecontinuous": {
             "patterns": [
                 {
-                    "match": "(minspan|span|start|aligntime|bins|end)=(?:.+?)(?:\\s|$)",
+                    "match": "(aligntime|end|start|bins|span|minspan)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2517,7 +2528,7 @@
             ]
         },
         "functions.makecontinuous": {
-            "match": "\\b(earliest|day|quarter|sec|week|hr|month|year|latest|min|log)(\\()",
+            "match": "\\b(latest|week|earliest|year|sec|log|min|day|quarter|hr|month)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2526,7 +2537,7 @@
         },
         "operators.makecontinuous": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WEEK|YEAR|QUARTER|DAY|MONTH|EARLIEST|LOG|MIN|HR|LATEST|SEC)\\b"
+            "match": "\\b(SEC|EARLIEST|LOG|MIN|WEEK|HR|MONTH|DAY|LATEST|YEAR|QUARTER)\\b"
         },
         "commands.makeresults": {
             "begin": "(?<=\\[|\\|)\\s+(makeresults)\\b",
@@ -2545,7 +2556,7 @@
         "arguments.makeresults": {
             "patterns": [
                 {
-                    "match": "(splunk_server_group|count|splunk_server|annotate)=(?:.+?)(?:\\s|$)",
+                    "match": "(splunk_server_group|annotate|count|splunk_server)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2571,7 +2582,7 @@
         "arguments.map": {
             "patterns": [
                 {
-                    "match": "(maxsearches|search)=(?:.+?)(?:\\s|$)",
+                    "match": "(search|maxsearches)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2597,7 +2608,7 @@
         "arguments.multikv": {
             "patterns": [
                 {
-                    "match": "(conf|multitable|noheader|forceheader|copyattrs|rmorig)=(?:.+?)(?:\\s|$)",
+                    "match": "(conf|noheader|rmorig|multitable|forceheader|copyattrs)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2685,7 +2696,7 @@
         "arguments.makemv": {
             "patterns": [
                 {
-                    "match": "(setsv|tokenizer|allowempty|delim)=(?:.+?)(?:\\s|$)",
+                    "match": "(allowempty|tokenizer|delim|setsv)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2747,7 +2758,7 @@
         "arguments.outlier": {
             "patterns": [
                 {
-                    "match": "(action|uselower|mark|param)=(?:.+?)(?:\\s|$)",
+                    "match": "(mark|uselower|action|param)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2757,7 +2768,7 @@
             ]
         },
         "functions.outlier": {
-            "match": "\\b(transform|tf|rm|remove)(\\()",
+            "match": "\\b(remove|tf|transform|rm)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -2766,7 +2777,7 @@
         },
         "operators.outlier": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(TF|TRANSFORM|REMOVE|RM)\\b"
+            "match": "\\b(REMOVE|TF|RM|TRANSFORM)\\b"
         },
         "commands.dump": {
             "begin": "(?<=\\[|\\|)\\s+(dump)\\b",
@@ -2785,7 +2796,7 @@
         "arguments.dump": {
             "patterns": [
                 {
-                    "match": "(rollsize|basefilename|fields|compress|format)=(?:.+?)(?:\\s|$)",
+                    "match": "(compress|format|fields|basefilename|rollsize)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2811,7 +2822,7 @@
         "arguments.outputcsv": {
             "patterns": [
                 {
-                    "match": "(singlefile|override_if_empty|dispatch|append|usexml|create_empty)=(?:.+?)(?:\\s|$)",
+                    "match": "(create_empty|usexml|dispatch|singlefile|override_if_empty|append)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2837,7 +2848,7 @@
         "arguments.outputlookup": {
             "patterns": [
                 {
-                    "match": "(override_if_empty|max|append|createinapp|output_format|key_field|create_empty)=(?:.+?)(?:\\s|$)",
+                    "match": "(create_empty|key_field|override_if_empty|output_format|append|max|createinapp)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2932,7 +2943,7 @@
         "arguments.predict": {
             "patterns": [
                 {
-                    "match": "(holdback|correlate|period|future_timespan|algorithm|suppress)=(?:.+?)(?:\\s|$)",
+                    "match": "(period|future_timespan|algorithm|suppress|holdback|correlate)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -2943,7 +2954,7 @@
         },
         "operators.predict": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(LLP5|BILL|LLT|LL|LLP|LLB)\\b"
+            "match": "\\b(LLP|LLT|BILL|LLP5|LLB|LL)\\b"
         },
         "commands.preview": {
             "begin": "(?<=\\[|\\|)\\s+(preview)\\b",
@@ -2972,7 +2983,7 @@
         "arguments.rare": {
             "patterns": [
                 {
-                    "match": "(percentfield|showcount|useother|limit|countfield|showperc|otherstr)=(?:.+?)(?:\\s|$)",
+                    "match": "(countfield|showcount|otherstr|showperc|percentfield|limit|useother)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3092,7 +3103,7 @@
             ]
         },
         "functions.replace": {
-            "match": "\\b(in|with)(\\()",
+            "match": "\\b(with|in)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3101,7 +3112,7 @@
         },
         "operators.replace": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WITH|IN)\\b"
+            "match": "\\b(IN|WITH)\\b"
         },
         "commands.rex": {
             "begin": "(?<=\\[|\\|)\\s+(rex)\\b",
@@ -3126,7 +3137,7 @@
         "arguments.rex": {
             "patterns": [
                 {
-                    "match": "(field|max_match|offset_field|mode)=(?:.+?)(?:\\s|$)",
+                    "match": "(offset_field|max_match|field|mode)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3170,7 +3181,7 @@
         "arguments.rtorder": {
             "patterns": [
                 {
-                    "match": "(discard|buffer_span|max_buffer_size)=(?:.+?)(?:\\s|$)",
+                    "match": "(buffer_span|max_buffer_size|discard)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3180,7 +3191,7 @@
             ]
         },
         "functions.rtorder": {
-            "match": "\\b(day|quarter|sec|week|hr|month|year|min)(\\()",
+            "match": "\\b(week|year|sec|min|day|quarter|hr|month)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3189,7 +3200,7 @@
         },
         "operators.rtorder": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WEEK|YEAR|QUARTER|DAY|MONTH|MIN|HR|SEC)\\b"
+            "match": "\\b(SEC|MIN|WEEK|HR|MONTH|DAY|YEAR|QUARTER)\\b"
         },
         "commands.select": {
             "begin": "(?<=\\[|\\|)\\s+(select|report)\\b",
@@ -3276,7 +3287,7 @@
         "arguments.sendalert": {
             "patterns": [
                 {
-                    "match": "(results_path|results_link)=(?:.+?)(?:\\s|$)",
+                    "match": "(results_link|results_path)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3320,7 +3331,7 @@
         "arguments.sendemail": {
             "patterns": [
                 {
-                    "match": "(message|sendpdf|width_sort_columns|sendresults|footer|subject|pdfview|inline|graceful|content_type|format|maxinputs|use_ssl|paperorientation|priority|bcc|cc|to|use_tls|papersize|sendcsv|maxtime|server|from)=(?:.+?)(?:\\s|$)",
+                    "match": "(priority|paperorientation|maxinputs|sendcsv|papersize|use_tls|content_type|footer|message|maxtime|format|subject|use_ssl|server|sendresults|bcc|graceful|pdfview|inline|from|to|sendpdf|width_sort_columns|cc)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3330,7 +3341,7 @@
             ]
         },
         "functions.sendemail": {
-            "match": "\\b(normal|h|ledger|csv|table|html|legal|m|a4|portrait|high|raw|highest|s|low|a5|letter|a3|lowest|landscape|a2|d|plain)(\\()",
+            "match": "\\b(html|normal|landscape|a3|highest|s|a2|plain|raw|csv|h|a5|letter|table|low|portrait|lowest|a4|high|legal|d|ledger|m)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3339,7 +3350,7 @@
         },
         "operators.sendemail": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(LOWEST|HIGH|A4|HTML|M|CSV|PLAIN|NORMAL|LANDSCAPE|TABLE|A5|A3|H|A2|RAW|S|D|HIGHEST|PORTRAIT|LETTER|LEDGER|LOW|LEGAL)\\b"
+            "match": "\\b(CSV|RAW|A3|NORMAL|PORTRAIT|A4|HTML|LETTER|H|HIGHEST|LEGAL|PLAIN|TABLE|LANDSCAPE|LEDGER|LOWEST|S|A2|D|LOW|A5|HIGH|M)\\b"
         },
         "commands.setfields": {
             "begin": "(?<=\\[|\\|)\\s+(setfields)\\b",
@@ -3368,7 +3379,7 @@
         "arguments.spath": {
             "patterns": [
                 {
-                    "match": "(input|output|path)=(?:.+?)(?:\\s|$)",
+                    "match": "(path|output|input)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3404,7 +3415,7 @@
         "arguments.transpose": {
             "patterns": [
                 {
-                    "match": "(header_field|column_name|include_empty)=(?:.+?)(?:\\s|$)",
+                    "match": "(column_name|header_field|include_empty)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3443,7 +3454,7 @@
         "arguments.metasearch": {
             "patterns": [
                 {
-                    "match": "(monthsago|endtimeu|savedsplunk|minutesago|daysago|hoursago|startmonthsago|starttime|searchtimespanminutes|endmonthsago|latest|startminutesago|earliest|searchtimespandays|starthoursago|_index_earliest|enddaysago|endminutesago|searchtimespanhours|startdaysago|_index_latest|timeformat|endhoursago|endtime|searchtimespanmonths|starttimeu|savedsearch)=(?:.+?)(?:\\s|$)",
+                    "match": "(latest|endhoursago|startmonthsago|endmonthsago|savedsearch|searchtimespanminutes|savedsplunk|starttimeu|starthoursago|hoursago|timeformat|_index_latest|enddaysago|monthsago|searchtimespanmonths|searchtimespanhours|earliest|daysago|minutesago|searchtimespandays|endtimeu|endminutesago|startminutesago|starttime|startdaysago|endtime|_index_earliest)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3476,7 +3487,7 @@
         "arguments.search": {
             "patterns": [
                 {
-                    "match": "(monthsago|endtimeu|savedsplunk|minutesago|daysago|hoursago|startmonthsago|starttime|searchtimespanminutes|endmonthsago|latest|startminutesago|earliest|searchtimespandays|starthoursago|_index_earliest|enddaysago|endminutesago|searchtimespanhours|startdaysago|_index_latest|timeformat|endhoursago|endtime|searchtimespanmonths|starttimeu|savedsearch)=(?:.+?)(?:\\s|$)",
+                    "match": "(latest|endhoursago|startmonthsago|endmonthsago|savedsearch|searchtimespanminutes|savedsplunk|starttimeu|starthoursago|hoursago|timeformat|_index_latest|enddaysago|monthsago|searchtimespanmonths|searchtimespanhours|earliest|daysago|minutesago|searchtimespandays|endtimeu|endminutesago|startminutesago|starttime|startdaysago|endtime|_index_earliest)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3507,7 +3518,7 @@
             ]
         },
         "functions.set": {
-            "match": "\\b(diff|intersect|union)(\\()",
+            "match": "\\b(diff|union|intersect)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3516,7 +3527,7 @@
         },
         "operators.set": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(UNION|DIFF|INTERSECT)\\b"
+            "match": "\\b(DIFF|INTERSECT|UNION)\\b"
         },
         "commands.cluster": {
             "begin": "(?<=\\[|\\|)\\s+(cluster|slc)\\b",
@@ -3541,7 +3552,7 @@
         "arguments.cluster": {
             "patterns": [
                 {
-                    "match": "(match|labelonly|t|field|delims|labelfield|showcount|countfield)=(?:.+?)(?:\\s|$)",
+                    "match": "(countfield|labelfield|showcount|t|field|match|delims|labelonly)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3551,7 +3562,7 @@
             ]
         },
         "functions.cluster": {
-            "match": "\\b(termlist|termset|ngramset)(\\()",
+            "match": "\\b(termset|ngramset|termlist)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3560,7 +3571,7 @@
         },
         "operators.cluster": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(TERMSET|NGRAMSET|TERMLIST)\\b"
+            "match": "\\b(TERMSET|TERMLIST|NGRAMSET)\\b"
         },
         "commands.shape": {
             "begin": "(?<=\\[|\\|)\\s+(shape)\\b",
@@ -3579,7 +3590,7 @@
         "arguments.shape": {
             "patterns": [
                 {
-                    "match": "(maxvalues|maxresolution)=(?:.+?)(?:\\s|$)",
+                    "match": "(maxresolution|maxvalues)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3616,7 +3627,7 @@
             ]
         },
         "functions.sort": {
-            "match": "\\b(str|d|num|desc|auto|ip)(\\()",
+            "match": "\\b(desc|str|ip|d|auto|num)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3625,7 +3636,7 @@
         },
         "operators.sort": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NUM|IP|AUTO|STR|D|DESC)\\b"
+            "match": "\\b(IP|NUM|STR|DESC|D|AUTO)\\b"
         },
         "commands.collect": {
             "begin": "(?<=\\[|\\|)\\s+(collect|stash|summaryindex|sumindex)\\b",
@@ -3644,7 +3655,7 @@
         "arguments.collect": {
             "patterns": [
                 {
-                    "match": "(testmode|index|sourcetype|file|spool|run_in_preview|host|marker|uselb|addtime|source)=(?:.+?)(?:\\s|$)",
+                    "match": "(file|addtime|testmode|source|index|run_in_preview|marker|spool|host|sourcetype|uselb)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3676,7 +3687,7 @@
         "arguments.mcatalog": {
             "patterns": [
                 {
-                    "match": "(monthsago|endtimeu|savedsplunk|minutesago|daysago|hoursago|startmonthsago|starttime|append|endmonthsago|latest|searchtimespanminutes|prestats|startminutesago|earliest|searchtimespandays|starthoursago|_index_earliest|enddaysago|endminutesago|searchtimespanhours|startdaysago|_index_latest|timeformat|endhoursago|endtime|searchtimespanmonths|starttimeu|savedsearch)=(?:.+?)(?:\\s|$)",
+                    "match": "(latest|endhoursago|startmonthsago|endmonthsago|savedsearch|searchtimespanminutes|savedsplunk|starttimeu|starthoursago|hoursago|timeformat|_index_latest|append|enddaysago|monthsago|searchtimespanmonths|prestats|searchtimespanhours|earliest|daysago|minutesago|searchtimespandays|endtimeu|endminutesago|startminutesago|starttime|startdaysago|endtime|_index_earliest)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3695,7 +3706,7 @@
         },
         "operators.mcatalog": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(WHERE|BY|IN|AS|VALUES|GROUPBY)\\b"
+            "match": "\\b(IN|AS|VALUES|WHERE|GROUPBY|BY)\\b"
         },
         "commands.mcollect": {
             "begin": "(?<=\\[|\\|)\\s+(mcollect)\\b",
@@ -3714,7 +3725,7 @@
         "arguments.mcollect": {
             "patterns": [
                 {
-                    "match": "(split|prefix_field|file|index|sourcetype|spool|host|source)=(?:.+?)(?:\\s|$)",
+                    "match": "(sourcetype|file|prefix_field|index|host|spool|split|source)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3740,7 +3751,7 @@
         "arguments.meventcollect": {
             "patterns": [
                 {
-                    "match": "(sourcetype|split|spool|prefix_field|host|source|index)=(?:.+?)(?:\\s|$)",
+                    "match": "(source|index|spool|host|prefix_field|sourcetype|split)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3772,7 +3783,7 @@
         "arguments.mrollup": {
             "patterns": [
                 {
-                    "match": "(overrides|span|type|aggregate|file|list|target|source)=(?:.+?)(?:\\s|$)",
+                    "match": "(type|span|file|target|overrides|source|aggregate|list)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3782,7 +3793,7 @@
             ]
         },
         "functions.mrollup": {
-            "match": "\\b(max|dimension|count|metric|included|avg|median|excluded|list|min|sum|perc)(\\()",
+            "match": "\\b(included|excluded|count|sum|avg|max|dimension|min|metric|median|perc|list)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3791,7 +3802,7 @@
         },
         "operators.mrollup": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(EXCLUDED|DIMENSION|MEDIAN|LIST|AVG|COUNT|INCLUDED|MIN|MAX|METRIC|PERC|SUM)\\b"
+            "match": "\\b(EXCLUDED|COUNT|AVG|DIMENSION|MIN|INCLUDED|MAX|MEDIAN|METRIC|LIST|SUM|PERC)\\b"
         },
         "commands.streamstats": {
             "begin": "(?<=\\[|\\|)\\s+(streamstats)\\b",
@@ -3816,7 +3827,7 @@
         "arguments.streamstats": {
             "patterns": [
                 {
-                    "match": "(global|allnum|reset_on_change|reset_before|window|time_window|current|reset_after)=(?:.+?)(?:\\s|$)",
+                    "match": "(global|reset_after|reset_before|current|time_window|reset_on_change|allnum|window)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3826,7 +3837,7 @@
             ]
         },
         "functions.streamstats": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|random|ln|mvsort|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|time|strptime|distinct_count|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|cidrmatch|dc|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|atan|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|min|pow|isint|isnum|day|relative_time|sha256|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|nullif|split|varp|hr|month|pi|ltrim|searchmatch|asin|hypot|year|stdevp|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|sec|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3835,7 +3846,7 @@
         },
         "operators.streamstats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|ISINT|COUNT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|PI|AVG|TONUMBER|ABS|ACOSH|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|HYPOT|MVRANGE|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|ACOS|LEN|TAN|DAY|ISNULL|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|C|MEAN|SHA1|ATAN|COALESCE|RTRIM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|ISINT|MVJOIN|AS|ROUND|SIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.eventstats": {
             "begin": "(?<=\\[|\\|)\\s+(eventstats)\\b",
@@ -3870,7 +3881,7 @@
             ]
         },
         "functions.eventstats": {
-            "match": "\\b(exact|split|count|replace|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|random|ln|mvsort|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|time|strptime|distinct_count|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|atan|exp|match|avg|tostring|ltrim|hypot|round|min|pow|isint|isnum|relative_time|sha256|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|max|min|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|mvrange|mvmap|ceil|exactperc|upperperc|avg|exp|nullif|split|varp|pi|ltrim|searchmatch|asin|hypot|stdevp|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3879,7 +3890,7 @@
         },
         "operators.eventstats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|RTRIM|ISNULL|AS|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|ISINT|COUNT|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|TAN|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|SIN|PI|AVG|TONUMBER|ABS|ACOSH|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|HYPOT|MVRANGE|SEARCHMATCH|SHA512|MVMAP|VALIDATE|MIN|URLDECODE|ACOS|LEN|TAN|ISNULL|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|C|MEAN|SHA1|ATAN|COALESCE|RTRIM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|ISINT|MVJOIN|AS|ROUND|SIN|NOT|SPLIT|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|TOSTRING)\\b"
         },
         "commands.stats": {
             "begin": "(?<=\\[|\\|)\\s+(stats)\\b",
@@ -3904,7 +3915,7 @@
         "arguments.stats": {
             "patterns": [
                 {
-                    "match": "(partitions|allnum|dedup_splitvals|delim)=(?:.+?)(?:\\s|$)",
+                    "match": "(partitions|allnum|delim|dedup_splitvals)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -3914,7 +3925,7 @@
             ]
         },
         "functions.stats": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|random|ln|mvsort|sparkline|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|time|strptime|range|distinct_count|mvindex|abs|sum|log|isbool|max|commands|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|atan|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|min|pow|isint|isnum|day|relative_time|sha256|sumsq|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|nullif|split|hr|varp|month|pi|ltrim|searchmatch|asin|hypot|sum|year|stdevp|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|sec|strftime|len|sqrt|sparkline|typeof|coalesce|ifnull|isbool|sumsq|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|range|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -3923,7 +3934,7 @@
         },
         "operators.stats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|COUNT|ISINT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|SUMSQ|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|SUM|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|SPARKLINE|PI|AVG|TONUMBER|ABS|ACOSH|RANGE|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|HYPOT|MVRANGE|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|ACOS|LEN|RANGE|DAY|TAN|ISNULL|SPARKLINE|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|MEAN|C|AND|SHA1|SUMSQ|ATAN|COALESCE|RTRIM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|SUM|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|ISINT|MVJOIN|AS|ROUND|SIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.strcat": {
             "begin": "(?<=\\[|\\|)\\s+(strcat)\\b",
@@ -4000,7 +4011,7 @@
         "arguments.sistats": {
             "patterns": [
                 {
-                    "match": "(partitions|allnum|dedup_splitvals|delim)=(?:.+?)(?:\\s|$)",
+                    "match": "(partitions|allnum|delim|dedup_splitvals)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4010,7 +4021,7 @@
             ]
         },
         "functions.sistats": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|random|ln|mvsort|sparkline|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|time|strptime|range|distinct_count|mvindex|abs|sum|log|isbool|max|commands|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|atan|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|min|pow|isint|isnum|day|relative_time|sha256|sumsq|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|nullif|split|hr|varp|month|pi|ltrim|searchmatch|asin|hypot|sum|year|stdevp|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|sec|strftime|len|sqrt|sparkline|typeof|coalesce|ifnull|isbool|sumsq|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|range|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4019,7 +4030,7 @@
         },
         "operators.sistats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|COUNT|ISINT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|SUMSQ|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|SUM|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|SPARKLINE|PI|AVG|TONUMBER|ABS|ACOSH|RANGE|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|HYPOT|MVRANGE|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|ACOS|LEN|RANGE|DAY|TAN|ISNULL|SPARKLINE|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|MEAN|C|AND|SHA1|SUMSQ|ATAN|COALESCE|RTRIM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|SUM|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|ISINT|MVJOIN|AS|ROUND|SIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.sitop": {
             "begin": "(?<=\\[|\\|)\\s+(sitop)\\b",
@@ -4038,7 +4049,7 @@
         "arguments.sitop": {
             "patterns": [
                 {
-                    "match": "(percentfield|showcount|useother|limit|countfield|showperc|otherstr)=(?:.+?)(?:\\s|$)",
+                    "match": "(countfield|showcount|otherstr|showperc|percentfield|limit|useother)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4064,7 +4075,7 @@
         "arguments.sirare": {
             "patterns": [
                 {
-                    "match": "(percentfield|showcount|useother|limit|countfield|showperc|otherstr)=(?:.+?)(?:\\s|$)",
+                    "match": "(countfield|showcount|otherstr|showperc|percentfield|limit|useother)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4096,7 +4107,7 @@
         "arguments.sichart": {
             "patterns": [
                 {
-                    "match": "(minspan|span|dedup_splitvals|start|aligntime|agg|bins|otherstr|sep|usenull|nullstr|end|useother|cont|limit|format)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|format|dedup_splitvals|nullstr|cont|limit|useother|aligntime|end|usenull|otherstr|start|agg|bins|span|minspan)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4106,7 +4117,7 @@
             ]
         },
         "functions.sichart": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|earliest|random|ln|mvsort|sparkline|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|notin|time|strptime|range|mvindex|distinct_count|abs|sum|log|top|isbool|max|commands|sin|in|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|bottom|atan|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|latest|min|pow|isint|isnum|day|relative_time|sha256|sumsq|upperperc|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|notin|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|nullif|split|hr|varp|top|month|pi|ltrim|searchmatch|asin|hypot|bottom|sum|earliest|year|stdevp|null|sinh|false|acos|latest|ln|rtrim|mvfilter|like|md5|sec|strftime|len|sqrt|sparkline|typeof|coalesce|ifnull|isbool|sumsq|commands|cidrmatch|case|ceiling|sha512|as|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|in|range|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4115,7 +4126,7 @@
         },
         "operators.sichart": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|OVER|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|IN|STRPTIME|C|ISSTR|EXACTPERC|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|COUNT|ISINT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|TOP|SUMSQ|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|EARLIEST|ISBOOL|BY|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|LATEST|BOTTOM|MVSORT|SUM|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|SPARKLINE|PI|AVG|TONUMBER|ABS|NOTIN|ACOSH|RANGE|LTRIM|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|EARLIEST|MVRANGE|HYPOT|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|IN|ACOS|LEN|RANGE|DAY|TAN|ISNULL|SPARKLINE|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|MEAN|C|AND|SHA1|SUMSQ|ATAN|COALESCE|RTRIM|BY|BOTTOM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|LATEST|ABS|SUM|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|ISBOOL|MVCOUNT|OVER|OR|FALSE|TYPEOF|EXACTPERC|SINH|STDEV|TOP|ISINT|MVJOIN|AS|ROUND|SIN|NOTIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.sitimechart": {
             "begin": "(?<=\\[|\\|)\\s+(sitimechart)\\b",
@@ -4140,7 +4151,7 @@
         "arguments.sitimechart": {
             "patterns": [
                 {
-                    "match": "(minspan|fixedrange|span|dedup_splitvals|start|aligntime|bins|otherstr|usenull|partial|sep|format|nullstr|useother|cont|limit|end)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|format|partial|dedup_splitvals|nullstr|cont|limit|useother|aligntime|end|usenull|otherstr|start|fixedrange|bins|span|minspan)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4150,7 +4161,7 @@
             ]
         },
         "functions.sitimechart": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|earliest|random|ln|mvsort|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|notin|time|strptime|distinct_count|mvindex|abs|log|top|isbool|commands|max|sin|in|sigfig|per_day|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|per_second|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|bottom|atan|per_hour|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|latest|min|per_minute|pow|isint|isnum|day|relative_time|sha256|upperperc|atanh|null|by|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|notin|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|per_hour|nullif|split|varp|hr|bottom|top|month|pi|ltrim|per_day|searchmatch|asin|hypot|earliest|year|stdevp|null|sinh|false|acos|latest|ln|rtrim|mvfilter|like|md5|sec|per_second|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|per_minute|as|sha512|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|by|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|in|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4159,7 +4170,7 @@
         },
         "operators.sitimechart": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|PER_DAY|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|PER_MINUTE|ATAN|MATCH|IN|STRPTIME|C|PER_HOUR|EXACTPERC|ISSTR|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|COUNT|ISINT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|TOP|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|EARLIEST|BY|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|LATEST|BOTTOM|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|PI|AVG|TONUMBER|ABS|NOTIN|ACOSH|LTRIM|PER_SECOND|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|EARLIEST|PER_DAY|MVRANGE|HYPOT|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|IN|ACOS|LEN|TAN|DAY|ISNULL|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|C|MEAN|SHA1|PER_HOUR|ATAN|COALESCE|RTRIM|BY|BOTTOM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|LATEST|ABS|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|PER_SECOND|ISBOOL|MVCOUNT|OR|PER_MINUTE|TYPEOF|FALSE|EXACTPERC|SINH|STDEV|TOP|ISINT|MVJOIN|AS|ROUND|SIN|NOTIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.tags": {
             "begin": "(?<=\\[|\\|)\\s+(tags)\\b",
@@ -4235,7 +4246,7 @@
             ]
         },
         "functions.trendline": {
-            "match": "\\b(ema|as|sma|wma)(\\()",
+            "match": "\\b(wma|as|sma|ema)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4244,7 +4255,7 @@
         },
         "operators.trendline": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(SMA|EMA|WMA|AS)\\b"
+            "match": "\\b(SMA|AS|WMA|EMA)\\b"
         },
         "commands.timechart": {
             "begin": "(?<=\\[|\\|)\\s+(timechart)\\b",
@@ -4269,7 +4280,7 @@
         "arguments.timechart": {
             "patterns": [
                 {
-                    "match": "(minspan|fixedrange|span|dedup_splitvals|start|aligntime|bins|otherstr|usenull|partial|sep|format|nullstr|useother|cont|limit|end)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|format|partial|dedup_splitvals|nullstr|cont|limit|useother|aligntime|end|usenull|otherstr|start|fixedrange|bins|span|minspan)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4279,7 +4290,7 @@
             ]
         },
         "functions.timechart": {
-            "match": "\\b(exact|split|count|sec|replace|hr|floor|ceiling|true|typeof|tanh|perc|isnotnull|var|earliest|random|ln|mvsort|mvdedup|stdev|tan|exactperc|sqrt|spath|atan2|mvfilter|acosh|coalesce|varp|mvzip|asinh|week|notin|time|strptime|distinct_count|mvindex|abs|log|top|isbool|commands|max|sin|in|sigfig|per_day|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|per_second|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|stdevp|now|urldecode|p|cosh|tonumber|md5|case|dc|cidrmatch|lower|mean|like|c|isnull|false|upper|sha512|len|mvmap|as|sha1|bottom|atan|per_hour|exp|match|quarter|month|avg|tostring|ltrim|hypot|year|round|latest|min|per_minute|pow|isint|isnum|day|relative_time|sha256|upperperc|atanh|null|by|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|dc|notin|max|min|day|relative_time|validate|random|stdev|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|c|log|abs|mean|tanh|sin|sigfig|p|quarter|mvrange|mvmap|ceil|exactperc|week|upperperc|avg|exp|per_hour|nullif|split|varp|hr|bottom|top|month|pi|ltrim|per_day|searchmatch|asin|hypot|earliest|year|stdevp|null|sinh|false|acos|latest|ln|rtrim|mvfilter|like|md5|sec|per_second|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|per_minute|as|sha512|atan|match|isstr|urldecode|distinct_count|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|by|trim|tostring|var|exact|count|true|asinh|mvdedup|round|spath|strptime|isnum|perc|isnull|now|in|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4288,7 +4299,7 @@
         },
         "operators.timechart": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|PER_DAY|MEAN|STRFTIME|SPLIT|SINH|MVINDEX|MVCOUNT|COMMANDS|SHA512|MIN|P|HR|RTRIM|AS|ISNULL|MVDEDUP|TIME|FALSE|DC|SEARCHMATCH|ACOS|TRIM|NOT|PER_MINUTE|ATAN|MATCH|IN|STRPTIME|C|PER_HOUR|EXACTPERC|ISSTR|CASE|RANDOM|MVZIP|UPPER|STDEVP|TRUE|MVFIND|TANH|COUNT|ISINT|DAY|UPPERPERC|CEIL|LOG|DISTINCT_COUNT|LEN|PERC|OR|NULLIF|TOP|WEEK|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|EARLIEST|BY|MAX|REPLACE|MVAPPEND|ASINH|SEC|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|LATEST|BOTTOM|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|QUARTER|TAN|MONTH|EXACT|POW|VAR|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|YEAR|SIN|PI|AVG|TONUMBER|ABS|NOTIN|ACOSH|LTRIM|PER_SECOND|STDEV|SHA256|FLOOR|MVMAP|LIKE|VARP|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|XOR|ASINH|EARLIEST|PER_DAY|MVRANGE|HYPOT|SEARCHMATCH|SHA512|MIN|MVMAP|VALIDATE|URLDECODE|IN|ACOS|LEN|TAN|DAY|ISNULL|MVFILTER|VARP|DISTINCT_COUNT|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|C|MEAN|SHA1|PER_HOUR|ATAN|COALESCE|RTRIM|BY|BOTTOM|PERC|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|LATEST|ABS|COMMANDS|P|NULL|CASE|UPPERPERC|COUNT|AVG|IF|ACOSH|MONTH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|SEC|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|DC|NOW|MVAPPEND|PER_SECOND|ISBOOL|MVCOUNT|OR|PER_MINUTE|TYPEOF|FALSE|EXACTPERC|SINH|STDEV|TOP|ISINT|MVJOIN|AS|ROUND|SIN|NOTIN|NOT|SPLIT|WEEK|MAX|VAR|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|STDEVP|MVSORT|TANH|ATAN2|LTRIM|HR|TOSTRING|YEAR|QUARTER)\\b"
         },
         "commands.timewrap": {
             "begin": "(?<=\\[|\\|)\\s+(timewrap)\\b",
@@ -4313,7 +4324,7 @@
         "arguments.timewrap": {
             "patterns": [
                 {
-                    "match": "(align|series|time_format)=(?:.+?)(?:\\s|$)",
+                    "match": "(time_format|series|align)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4323,7 +4334,7 @@
             ]
         },
         "functions.timewrap": {
-            "match": "\\b(exact|day|quarter|sec|week|hr|month|relative|year|short|min|now|end)(\\()",
+            "match": "\\b(week|exact|short|year|sec|min|relative|day|hr|end|quarter|now|month)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4332,7 +4343,7 @@
         },
         "operators.timewrap": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|WEEK|YEAR|QUARTER|DAY|MONTH|SHORT|MIN|HR|EXACT|END|RELATIVE|SEC)\\b"
+            "match": "\\b(RELATIVE|SEC|SHORT|END|MIN|WEEK|EXACT|HR|MONTH|DAY|NOW|YEAR|QUARTER)\\b"
         },
         "commands.top": {
             "begin": "(?<=\\[|\\|)\\s+(top|common)\\b",
@@ -4351,7 +4362,7 @@
         "arguments.top": {
             "patterns": [
                 {
-                    "match": "(percentfield|showcount|useother|limit|countfield|showperc|otherstr)=(?:.+?)(?:\\s|$)",
+                    "match": "(countfield|showcount|otherstr|showperc|percentfield|limit|useother)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4409,7 +4420,7 @@
         "arguments.mstats": {
             "patterns": [
                 {
-                    "match": "(monthsago|endtimeu|savedsplunk|hoursago|daysago|minutesago|span|starttime|searchtimespanminutes|endmonthsago|latest|append|fillnull_value|prestats|startminutesago|savedsearch|earliest|searchtimespandays|starttimeu|starthoursago|enddaysago|searchtimespanhours|endminutesago|startdaysago|_index_latest|timeformat|endhoursago|endtime|searchtimespanmonths|_index_earliest|backfill|update_period|startmonthsago)=(?:.+?)(?:\\s|$)",
+                    "match": "(endhoursago|startmonthsago|latest|endmonthsago|savedsearch|searchtimespanminutes|update_period|starttimeu|starthoursago|backfill|hoursago|fillnull_value|timeformat|starttime|span|_index_latest|append|enddaysago|daysago|searchtimespanmonths|earliest|searchtimespanhours|prestats|monthsago|minutesago|searchtimespandays|endtimeu|endminutesago|startminutesago|savedsplunk|startdaysago|endtime|_index_earliest)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4419,7 +4430,7 @@
             ]
         },
         "functions.mstats": {
-            "match": "\\b(var|varp|count|dc|upperperc|stdev|exactperc|avg|mean|distinct_count|c|stdevp|as|perc|p)(\\()",
+            "match": "\\b(exactperc|upperperc|var|avg|count|dc|as|c|mean|stdevp|p|perc|stdev|distinct_count|varp)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4428,7 +4439,7 @@
         },
         "operators.mstats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(MEAN|COUNT|AVG|UPPERPERC|WHERE|P|DISTINCT_COUNT|AS|PERC|DC|STDEV|GROUPBY|VARP|IN|C|EXACTPERC|BY|STDEVP|VAR)\\b"
+            "match": "\\b(AS|IN|VAR|WHERE|GROUPBY|DC|P|VARP|DISTINCT_COUNT|UPPERPERC|COUNT|STDEVP|AVG|MEAN|C|EXACTPERC|STDEV|BY|PERC)\\b"
         },
         "commands.tstats": {
             "begin": "(?<=\\[|\\|)\\s+(tstats)\\b",
@@ -4453,7 +4464,7 @@
         "arguments.tstats": {
             "patterns": [
                 {
-                    "match": "(monthsago|local|hoursago|daysago|minutesago|include_reduced_buckets|startmonthsago|allow_old_summaries|append|endmonthsago|fillnull_value|prestats|startminutesago|earliest|searchtimespandays|starthoursago|enddaysago|sid|startdaysago|timeformat|endhoursago|endtime|starttimeu|chunk_size|endtimeu|savedsplunk|span|starttime|searchtimespanminutes|latest|summariesonly|searchtimespanhours|endminutesago|_index_latest|datamodel|searchtimespanmonths|_index_earliest|savedsearch)=(?:.+?)(?:\\s|$)",
+                    "match": "(latest|endmonthsago|savedsearch|searchtimespanminutes|starttimeu|summariesonly|datamodel|hoursago|fillnull_value|local|append|allow_old_summaries|enddaysago|monthsago|searchtimespanmonths|searchtimespanhours|minutesago|endtimeu|endminutesago|starttime|include_reduced_buckets|startdaysago|sid|endtime|endhoursago|startmonthsago|starthoursago|timeformat|span|_index_latest|daysago|earliest|prestats|chunk_size|searchtimespandays|startminutesago|savedsplunk|_index_earliest)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4463,7 +4474,7 @@
             ]
         },
         "functions.tstats": {
-            "match": "\\b(var|varp|count|dc|upperperc|stdev|exactperc|avg|mean|distinct_count|c|stdevp|by|as|perc|p)(\\()",
+            "match": "\\b(exactperc|upperperc|var|avg|count|dc|as|c|mean|stdevp|p|perc|stdev|distinct_count|varp|by)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4472,7 +4483,7 @@
         },
         "operators.tstats": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(MEAN|COUNT|AVG|UPPERPERC|WHERE|P|DISTINCT_COUNT|AS|PERC|DC|STDEV|GROUPBY|FROM|PREFIX|VARP|IN|C|EXACTPERC|BY|STDEVP|VAR)\\b"
+            "match": "\\b(FROM|AS|IN|VAR|WHERE|GROUPBY|DC|P|VARP|DISTINCT_COUNT|UPPERPERC|COUNT|STDEVP|AVG|MEAN|C|PREFIX|EXACTPERC|STDEV|BY|PERC)\\b"
         },
         "commands.transaction": {
             "begin": "(?<=\\[|\\|)\\s+(transaction|transam)\\b",
@@ -4497,7 +4508,7 @@
         "arguments.transaction": {
             "patterns": [
                 {
-                    "match": "(monthsago|maxopenevents|connected|hoursago|daysago|endswith|minutesago|keeporphans|maxopentxn|name|nullstr|endmonthsago|startminutesago|earliest|searchtimespandays|starthoursago|enddaysago|delim|startdaysago|timeformat|endhoursago|endtime|starttimeu|endtimeu|savedsplunk|keepevicted|mvraw|maxevents|startswith|starttime|searchtimespanminutes|latest|savedsearch|mvlist|searchtimespanhours|endminutesago|maxpause|unifyends|_index_latest|maxspan|searchtimespanmonths|_index_earliest|startmonthsago)=(?:.+?)(?:\\s|$)",
+                    "match": "(latest|endmonthsago|savedsearch|searchtimespanminutes|nullstr|name|starttimeu|maxopentxn|keeporphans|maxopenevents|hoursago|enddaysago|monthsago|searchtimespanmonths|searchtimespanhours|delim|minutesago|keepevicted|connected|endtimeu|endminutesago|starttime|startdaysago|endtime|endswith|endhoursago|startmonthsago|maxevents|starthoursago|maxpause|timeformat|_index_latest|maxspan|mvraw|daysago|earliest|startswith|searchtimespandays|mvlist|unifyends|startminutesago|savedsplunk|_index_earliest)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4507,7 +4518,7 @@
             ]
         },
         "functions.transaction": {
-            "match": "\\b(m|s|d|h)(\\()",
+            "match": "\\b(s|d|m|h)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4516,7 +4527,7 @@
         },
         "operators.transaction": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(H|S|D|IN|M)\\b"
+            "match": "\\b(S|IN|D|H|M)\\b"
         },
         "commands.typeahead": {
             "begin": "(?<=\\[|\\|)\\s+(typeahead)\\b",
@@ -4535,7 +4546,7 @@
         "arguments.typeahead": {
             "patterns": [
                 {
-                    "match": "(max_time|collapse|endtimeu|count|starttimeu|prefix|index)=(?:.+?)(?:\\s|$)",
+                    "match": "(index|max_time|endtimeu|count|starttimeu|collapse|prefix)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4598,7 +4609,7 @@
             ]
         },
         "functions.where": {
-            "match": "\\b(exact|split|replace|floor|ceiling|true|typeof|tanh|isnotnull|random|ln|mvsort|mvdedup|tan|sqrt|spath|atan2|mvfilter|acosh|coalesce|mvzip|asinh|time|strptime|mvindex|abs|log|isbool|commands|max|sin|sigfig|asin|validate|mvjoin|rtrim|nullif|trim|strftime|isstr|searchmatch|mvfind|acos|ifnull|substr|mvappend|mvrange|sinh|if|mvcount|pi|ceil|now|urldecode|cosh|tonumber|md5|case|cidrmatch|lower|like|isnull|false|upper|sha512|len|mvmap|sha1|atan|exp|match|tostring|ltrim|hypot|round|min|pow|isint|isnum|relative_time|sha256|atanh|null|cos)(\\()",
+            "match": "\\b(if|atanh|isnotnull|mvsort|floor|max|min|relative_time|validate|random|pow|lower|cosh|tonumber|isint|mvfind|cos|mvzip|mvjoin|mvindex|acosh|replace|log|abs|tanh|sin|sigfig|mvrange|mvmap|ceil|exp|nullif|split|pi|ltrim|searchmatch|asin|hypot|null|sinh|false|acos|ln|rtrim|mvfilter|like|md5|strftime|len|sqrt|typeof|coalesce|ifnull|isbool|commands|cidrmatch|case|ceiling|sha512|atan|match|isstr|urldecode|tan|substr|upper|mvappend|sha1|atan2|time|mvcount|trim|tostring|exact|true|asinh|mvdedup|round|spath|strptime|isnum|isnull|now|sha256)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4607,7 +4618,7 @@
         },
         "operators.where": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(NOW|STRFTIME|SPLIT|MVINDEX|SINH|MVCOUNT|COMMANDS|SHA512|MIN|RTRIM|ISNULL|MVDEDUP|TIME|FALSE|SEARCHMATCH|ACOS|TRIM|NOT|ATAN|MATCH|STRPTIME|ISSTR|CASE|RANDOM|MVZIP|UPPER|TRUE|MVFIND|TANH|ISINT|CEIL|LOG|LEN|OR|NULLIF|CEILING|IFNULL|MVFILTER|ASIN|XOR|ISBOOL|MAX|REPLACE|MVAPPEND|ASINH|ISNOTNULL|MD5|COALESCE|LOWER|SPATH|ATAN2|MVSORT|LN|IF|MVRANGE|ATANH|EXP|MVJOIN|SIGFIG|TAN|EXACT|POW|TYPEOF|SHA1|VALIDATE|HYPOT|COS|AND|SIN|PI|TONUMBER|ABS|ACOSH|LTRIM|SHA256|FLOOR|MVMAP|LIKE|NULL|URLDECODE|TOSTRING|SQRT|ROUND|CIDRMATCH|COSH|RELATIVE_TIME|SUBSTR|ISNUM)\\b"
+            "match": "\\b(STRFTIME|ASINH|HYPOT|XOR|MVRANGE|SEARCHMATCH|SHA512|MVMAP|VALIDATE|MIN|URLDECODE|ACOS|LEN|TAN|ISNULL|MVFILTER|PI|MVFIND|TRIM|SPATH|RELATIVE_TIME|COSH|IFNULL|AND|SHA1|ATAN|COALESCE|RTRIM|UPPER|MVZIP|TIME|LOG|ASIN|SHA256|MD5|MVDEDUP|ISNUM|EXP|ATANH|EXACT|SUBSTR|ABS|COMMANDS|NULL|CASE|IF|ACOSH|LN|LOWER|MATCH|LIKE|ISNOTNULL|TRUE|STRPTIME|POW|NULLIF|REPLACE|TONUMBER|CIDRMATCH|NOW|MVAPPEND|ISBOOL|MVCOUNT|FALSE|OR|TYPEOF|SINH|ISINT|MVJOIN|ROUND|SIN|NOT|SPLIT|MAX|FLOOR|CEILING|CEIL|ISSTR|SQRT|RANDOM|SIGFIG|MVINDEX|COS|MVSORT|TANH|ATAN2|LTRIM|TOSTRING)\\b"
         },
         "commands.highlight": {
             "begin": "(?<=\\[|\\|)\\s+(highlight|hilite)\\b",
@@ -4636,7 +4647,7 @@
         "arguments.xyseries": {
             "patterns": [
                 {
-                    "match": "(format|sep|grouped)=(?:.+?)(?:\\s|$)",
+                    "match": "(sep|format|grouped)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4672,7 +4683,7 @@
         "arguments.rest": {
             "patterns": [
                 {
-                    "match": "(count|splunk_server_group|timeout|splunk_server)=(?:.+?)(?:\\s|$)",
+                    "match": "(timeout|splunk_server_group|count|splunk_server)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4701,7 +4712,7 @@
         "arguments.surrounding": {
             "patterns": [
                 {
-                    "match": "(timeafter|readlevel|searchkeys|id|timebefore)=(?:.+?)(?:\\s|$)",
+                    "match": "(id|timebefore|searchkeys|timeafter|readlevel)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4712,7 +4723,7 @@
         },
         "operators.surrounding": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(2|0|1|3)\\b"
+            "match": "\\b(1|3|0|2)\\b"
         },
         "commands.xmlkv": {
             "begin": "(?<=\\[|\\|)\\s+(xmlkv)\\b",
@@ -4783,7 +4794,7 @@
         "arguments.xpath": {
             "patterns": [
                 {
-                    "match": "(field|outfield|default)=(?:.+?)(?:\\s|$)",
+                    "match": "(outfield|field|default)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4809,7 +4820,7 @@
         "arguments.iplocation": {
             "patterns": [
                 {
-                    "match": "(lang|prefix|allfields)=(?:.+?)(?:\\s|$)",
+                    "match": "(prefix|lang|allfields)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4887,7 +4898,7 @@
         "arguments.scrub": {
             "patterns": [
                 {
-                    "match": "(dictionary|terms|timeconfig|namespace)=(?:.+?)(?:\\s|$)",
+                    "match": "(terms|timeconfig|dictionary|namespace)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4897,7 +4908,7 @@
             ]
         },
         "functions.scrub": {
-            "match": "\\b(name|public|private)(\\()",
+            "match": "\\b(public|name|private)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4931,7 +4942,7 @@
         "arguments.metadata": {
             "patterns": [
                 {
-                    "match": "(splunk_server|datatype|type|splunk_server_group|index)=(?:.+?)(?:\\s|$)",
+                    "match": "(index|splunk_server_group|datatype|type|splunk_server)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4941,7 +4952,7 @@
             ]
         },
         "functions.metadata": {
-            "match": "\\b(sources|sourcetypes|hosts)(\\()",
+            "match": "\\b(hosts|sources|sourcetypes)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -4950,7 +4961,7 @@
         },
         "operators.metadata": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(SOURCES|SOURCETYPES|HOSTS)\\b"
+            "match": "\\b(SOURCETYPES|SOURCES|HOSTS)\\b"
         },
         "commands.eventcount": {
             "begin": "(?<=\\[|\\|)\\s+(eventcount)\\b",
@@ -4969,7 +4980,7 @@
         "arguments.eventcount": {
             "patterns": [
                 {
-                    "match": "(index|list_vix|summarize|report_size)=(?:.+?)(?:\\s|$)",
+                    "match": "(summarize|index|report_size|list_vix)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -4995,7 +5006,7 @@
         "arguments.findtypes": {
             "patterns": [
                 {
-                    "match": "(max|useraw|notcovered)=(?:.+?)(?:\\s|$)",
+                    "match": "(useraw|notcovered|max)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -5041,7 +5052,7 @@
         "arguments.searchtxn": {
             "patterns": [
                 {
-                    "match": "(use_disjunct|max_terms|eventsonly)=(?:.+?)(?:\\s|$)",
+                    "match": "(eventsonly|max_terms|use_disjunct)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -5073,7 +5084,7 @@
         "arguments.walklex": {
             "patterns": [
                 {
-                    "match": "(pattern|splunk_server|type|splunk_server_group|prefix|index)=(?:.+?)(?:\\s|$)",
+                    "match": "(index|splunk_server_group|type|pattern|splunk_server|prefix)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -5083,7 +5094,7 @@
             ]
         },
         "functions.walklex": {
-            "match": "\\b(term|field|all|fieldvalue)(\\()",
+            "match": "\\b(all|field|term|fieldvalue)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -5092,7 +5103,7 @@
         },
         "operators.walklex": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(FIELD|FIELDVALUE|ALL|TERM)\\b"
+            "match": "\\b(FIELD|FIELDVALUE|TERM|ALL)\\b"
         },
         "commands.msearch": {
             "begin": "(?<=\\[|\\|)\\s+(msearch)\\b",
@@ -5111,7 +5122,7 @@
         "arguments.msearch": {
             "patterns": [
                 {
-                    "match": "(filter|earliest|splunk_server|latest|splunk_server_group|index)=(?:.+?)(?:\\s|$)",
+                    "match": "(latest|index|splunk_server_group|earliest|filter|splunk_server)=(?:.+?)(?:\\s|$)",
                     "captures": {
                         "1": {
                             "name": "entity.other.attribute-name.spl"
@@ -5138,7 +5149,7 @@
             ]
         },
         "functions.x11": {
-            "match": "\\b(as|mult|add)(\\()",
+            "match": "\\b(add|as|mult)(\\()",
             "captures": {
                 "1": {
                     "name": "support.function.spl"
@@ -5147,7 +5158,7 @@
         },
         "operators.x11": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(ADD|MULT|AS)\\b"
+            "match": "\\b(AS|ADD|MULT)\\b"
         },
         "commands.union": {
             "begin": "(?<=\\[|\\|)\\s+(union)\\b",
@@ -5191,7 +5202,7 @@
         },
         "operators.union": {
             "name": "keyword.operator.word.spl",
-            "match": "\\b(INPUTLOOKUP|FEDERATED|SAVEDSEARCH|DATAMODEL)\\b"
+            "match": "\\b(FEDERATED|INPUTLOOKUP|DATAMODEL|SAVEDSEARCH)\\b"
         },
         "commands.dfsjob": {
             "begin": "(?<=\\[|\\|)\\s+(dfsjob)\\b",
