@@ -3,11 +3,11 @@ rule: rule_definition "::=" COMMAND? expression?
 ?expression: list | list "|" expression
 ?list: term | term list | term_group | term_group list
 ?term_group: ("(" expression ")" REPEAT_CHARS*)+ | ("[" expression "]" REPEAT_CHARS*)+
-?term: (operator | rule_name REPEAT_CHARS* | rule_name_ext REPEAT_CHARS* | key_value | range | optional_argument)+
+?term: (TEMPLATE_EXPR | operator | rule_name REPEAT_CHARS* | rule_name_ext REPEAT_CHARS* | key_value | range | optional_argument)+
 key_value: key "=" value
 key: argument | "(" argument_group ")" | rule_name | rule_name_ext
 argument_group: argument | argument_group "|" argument
-value: term | term_group
+value: TEMPLATE_EXPR | term | term_group
 range: rule_name ":" rule_name
 operator: operator_word | operator_symbol
 operator_word: OPERATOR_W
@@ -25,7 +25,10 @@ OPERATOR_S: "+" | "-" | "." | "!" | "*" | "%" | "/" | "," | "\",\"" | "\\\"" | "
 EQUAL_SIGN: "="
 RULE_NAME: /[\w-]+/
 COMMENT: /\?..*\?/
+TEMPLATE_EXPR: "${" /[^{}]+/ "}"
 REPEAT_CHARS: "?" | "*" | "+"
+
+template_expr: TEMPLATE_EXPR
 
 %import common.ESCAPED_STRING
 %import common.WS

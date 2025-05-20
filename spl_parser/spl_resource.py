@@ -18,12 +18,17 @@ from spl_parser.spl_objects import SPLCommand
 from spl_parser.syntax_parser import build_syntax_trees
 from spl_parser.tmlanguage_generator import TmLanguageGenerator
 from spl_parser.cli_print import log_message
-from spl_parser.exceptions import CommandNotFoundError, ParsingError,\
-                                  AuthenticationError, ConnectionError
+from spl_parser.exceptions import (
+    CommandNotFoundError,
+    ParsingError,
+    AuthenticationError,
+    ConnectionError,
+)
 
 
 class SplResource:
     """Base class defining SplResource"""
+
     def __init__(self):
         self.spl_terms = dict()
 
@@ -72,18 +77,19 @@ class SplResource:
         log_message("INFO", f"Fetching all SPL terms...")
         self.fetch_spl_terms()
 
-        pseudo_bnf = pkg_resources.read_text("spl_parser.grammars",
-                                             "pseudo_bnf.lark")
-        tm_template = pkg_resources.read_text("spl_parser.templates",
-                                              "template.tmLanguage.json")
+        pseudo_bnf = pkg_resources.read_text("spl_parser.grammars", "pseudo_bnf.lark")
+        tm_template = pkg_resources.read_text(
+            "spl_parser.templates", "template.tmLanguage.json"
+        )
+        log_message("INFO", f"Loaded tmLanguage template.")
+
         generator = TmLanguageGenerator(tm_template)
 
         log_message("INFO", "Building syntax trees...")
         trees = build_syntax_trees(pseudo_bnf, self.spl_terms)
 
         log_message("INFO", "Parsing SPL commands...")
-        commands = [x for x in self.spl_terms.values()\
-                    if isinstance(x, SPLCommand)]
+        commands = [x for x in self.spl_terms.values() if isinstance(x, SPLCommand)]
         for command in commands:
             command.parse(trees)
             generator.add_command(command)
@@ -94,6 +100,7 @@ class SplResource:
 
 class LocalSplResource(SplResource):
     """Class defining an SPL resource based on a local file."""
+
     def __init__(self, file):
         super().__init__()
         self.file = file
@@ -112,6 +119,7 @@ class LocalSplResource(SplResource):
 
 class RemoteSplResource(SplResource):
     """Class defining an SPL resource based on a remote Splunk server."""
+
     def __init__(self, url, username, password):
         """
         Args:
@@ -154,9 +162,12 @@ class RemoteSplResource(SplResource):
         Args:
             spl_terms (list): SPL terms to retrieve
         """
-        self.session = aiohttp.ClientSession(headers=self.headers,
-                            connector=aiohttp.TCPConnector(verify_ssl=False),
-                            auth=self.auth, raise_for_status=True)
+        self.session = aiohttp.ClientSession(
+            headers=self.headers,
+            connector=aiohttp.TCPConnector(verify_ssl=False),
+            auth=self.auth,
+            raise_for_status=True,
+        )
 
         async with self.session:
             try:
@@ -168,8 +179,9 @@ class RemoteSplResource(SplResource):
                         except KeyError:
                             pass
 
-                await asyncio.gather(*[self.async_fetch_spl_term(term)\
-                                       for term in spl_terms])
+                await asyncio.gather(
+                    *[self.async_fetch_spl_term(term) for term in spl_terms]
+                )
 
             except aiohttp.client_exceptions.ClientResponseError as e:
                 if e.code == 401:
